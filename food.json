@@ -4,7 +4,7 @@
     "foodList": [
       {
         "name":"Оливье",
-        "img":"url",
+        "img":"img/olivye.jpg",
         "components": [
           "горошек", "картошка", "мазик"
         ],
@@ -12,8 +12,8 @@
         "rate": 5
       },
       {
-        "name":"Оливье2",
-        "img":"url",
+        "name":"Цезарь",
+        "img":"img/cesar.jpg",
         "components": [
           "горошек", "картошка", "мазик"
         ],
@@ -28,7 +28,7 @@
     "foodList": [
       {
         "name":"Борщ",
-        "img":"url",
+        "img":"img/borsh.jpg",
         "components": [
           "горошек", "картошка", "мазик"
         ],
@@ -37,7 +37,7 @@
       },
       {
         "name":"Холодник",
-        "img":"url",
+        "img":"img/holodnik.jpg",
         "components": [
           "горошек", "картошка", "мазик"
         ],
@@ -51,8 +51,8 @@
     "name":"Горячее",
     "foodList": [
       {
-        "name":"Олиорравье",
-        "img":"url",
+        "name":"Стейк",
+        "img":"img/steak.jpg",
         "components": [
           "горошек", "картошка", "мазик"
         ],
@@ -60,8 +60,8 @@
         "rate": 5
       },
       {
-        "name":"Оливцнгье2",
-        "img":"url",
+        "name":"Паста Карбонара",
+        "img":"img/karbonara.jpg",
         "components": [
           "горошек", "картошка", "мазик"
         ],

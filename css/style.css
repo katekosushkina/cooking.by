@@ -38,3 +38,7 @@ header>a>img {
 #currentRecipe>img{
 		height: 350px !important;
 }
+
+#currentRecipe>.recipe{
+	width: 80%;
+}

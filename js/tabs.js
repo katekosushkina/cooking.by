@@ -38,7 +38,6 @@ $("body").on('click', ".fa-heart", function(){
   let id = $(this).attr("id");
   if ($(this).hasClass('fas')){
     localStorage.setItem(id, true);
-    console.log(id, localStorage.getItem(id))
   } else {
     localStorage.removeItem(id);
   }
@@ -57,7 +56,6 @@ $("body").on('click', ".foodImg", function(){
   let id = "#"+$(this).parent().attr('id');
   inf = ($(id).html());
   imgSrc = $(this).attr('src');
-  console.log(imgSrc);
   $.ajax({
   url: "https://raw.githubusercontent.com/katekosushkina/cooking.by/master/food.json",
 }).done(function(text) {
@@ -71,9 +69,10 @@ $("body").on('click', ".foodImg", function(){
                 ${inf}
                 <div class="components"><b>${food.components.join('<br>')}</b>
                 </div>
-                <div class="recipe">${food.recipe}
-                </div>`)
-                $("#currentRecipe").css({'position': 'absolute','z-index': '999999', 'height': '1000px', 'width': '1000px', 'clear': 'both', 'background-color':'white' });
+                <div class="recipe" style="border:1px solid black">${food.recipe}
+                </div>
+                <a href="#top" onclick="window.scrollTo(0,0);return!1;">Наверх</a>`)
+                $("#currentRecipe").css({'position': 'absolute','z-index': '999999', 'height': '1000px', 'width': '100%', 'clear': 'both', 'background-color':'white' });
             }
 
         });

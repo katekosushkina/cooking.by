@@ -67,7 +67,7 @@ $("body").on('click', ".foodImg", function(){
             $("#currentRecipe").append(
                 `<button type="button" onclick="removeCurrentRecipe()">назад</button>
                 ${inf}
-                <div class="components"><b>${food.components.join('<br>')}</b>
+                <div class="components"><b>${food.components.join('\n')}</b>
                 </div>
                 <div class="recipe" style="border:1px solid black">${food.recipe}
                 </div>

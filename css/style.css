@@ -22,7 +22,7 @@ header>a>img {
   border: 2px solid black;
   height: 30px;
   width: 70%;
-  margin-top: 40px;
+  margin-top: 20px;
   box-sizing: border-box;
   clear: both;
 }
@@ -41,4 +41,7 @@ header>a>img {
 
 #currentRecipe>.recipe{
 	width: 80%;
+}
+.buttons{
+	margin-top:30px;
 }

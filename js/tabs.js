@@ -2,6 +2,7 @@ function removeCurrentRecipe(){
   $("#currentRecipe").html('');
   $("#currentRecipe").css({'position': 'absolute','z-index': '0', 'height': '0', 'width': '0', 'clear': 'both', 'background-color':'white' });
 };
+
 function findRecipe(){
   $('.name').each(function(index,elem) {
     var length = $('.name').length;
@@ -25,10 +26,15 @@ function findRecipe(){
               </div>
               <a href="#top" onclick="window.scrollTo(0,0);return!1;">Наверх</a>`)
               $("#currentRecipe").css({'position': 'absolute','z-index': '999999', 'height': '1000px', 'width': '100%', 'clear': 'both', 'background-color':'white' });
+          return false;
+          } else if(index===length-1){
+            alert("Такого рецепта нет!")
           }
+          index ++;
           });
       });
     });
+
   return false;
 });
 
@@ -38,6 +44,11 @@ function findRecipe(){
 $(document).ready(function(){
 
   $("#autocomplete").focus();
+  $("#autocomplete").keydown(function(e) {
+    if(e.keyCode === 13) {
+    findRecipe();
+    }
+  });
   let options = {
       source: ["Оливье","Цезарь","Борщ", "Холодник","Стейк","Карбонара"],
       minLength: 2

@@ -2,6 +2,7 @@ function removeCurrentRecipe(){
   $("#currentRecipe").html('');
   $("#currentRecipe").css({'position': 'absolute','z-index': '0', 'height': '0', 'width': '0', 'clear': 'both', 'background-color':'white' });
 };
+
 $(document).ready(function(){
 
   $( "#autocomplete" ).focus();
@@ -22,7 +23,7 @@ $(document).ready(function(){
       foodList +=
       `<div class="cont" id="cont_${i}_${j}">
         <div class="name"> ${food.name}
-          <i class="far fa-heart" id="pic_${i}_${j}"></i> </div>
+          <i class="far fa-heart pic_${i}_${j}"></i> </div>
         <img src="${food.img}" class="foodImg">
       </div>`
     });
@@ -33,13 +34,17 @@ $(document).ready(function(){
   });
 });
 
+$("body").on('click', ".nav", function(){
+  removeCurrentRecipe();
+});
+
 $("body").on('click', ".fa-heart", function(){
   $(this).toggleClass('far').toggleClass('fas');
-  let id = $(this).attr("id");
+  let clas = $(this).attr("class");
   if ($(this).hasClass('fas')){
-    localStorage.setItem(id, true);
+    localStorage.setItem(clas, true);
   } else {
-    localStorage.removeItem(id);
+    localStorage.removeItem(clas);
   }
 })
 
@@ -79,4 +84,16 @@ $("body").on('click', ".foodImg", function(){
   });
 
 });
+  $('#autocomplete').autocomplete({
+      serviceUrl: 'autocomplete.json',
+      minChars: 2,
+      delimiter: /(,|;)\s*/,
+      maxHeight: 400,
+      width: 300,
+      zIndex: 9999,
+      deferRequestBy: 0,
+      params: { country: 'Yes'},
+      onSelect: function(data, value){ },
+  });
+
 });

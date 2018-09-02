@@ -67,14 +67,13 @@ $("body").on('click', ".foodImg", function(){
             $("#currentRecipe").append(
                 `<button type="button" onclick="removeCurrentRecipe()">назад</button>
                 ${inf}
-                <div class="components"><b>${food.components.join('\n')}</b>
+                <div class="components"><b>${food.components.join('<br>')}</b>
                 </div>
                 <div class="recipe" style="border:1px solid black">${food.recipe}
                 </div>
                 <a href="#top" onclick="window.scrollTo(0,0);return!1;">Наверх</a>`)
                 $("#currentRecipe").css({'position': 'absolute','z-index': '999999', 'height': '1000px', 'width': '100%', 'clear': 'both', 'background-color':'white' });
             }
-
         });
       });
   });

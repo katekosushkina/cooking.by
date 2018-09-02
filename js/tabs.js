@@ -2,22 +2,51 @@ function removeCurrentRecipe(){
   $("#currentRecipe").html('');
   $("#currentRecipe").css({'position': 'absolute','z-index': '0', 'height': '0', 'width': '0', 'clear': 'both', 'background-color':'white' });
 };
+function findRecipe(){
+  $('.name').each(function(index,elem) {
+    var length = $('.name').length;
+    let ac = $("#autocomplete").val();
+    $.ajax({
+    url: "https://raw.githubusercontent.com/katekosushkina/cooking.by/master/food.json",
+  }).done(function(text) {
+    let data = JSON.parse(text);
+    data.tabs.map((tab, i)=>{
+      tab.foodList.map((food, j)=>{
+        var foodName = food.name;
+        if (ac===foodName){
+          $("#currentRecipe").append(
+              `<button type="button" onclick="removeCurrentRecipe()">назад</button>
+                <div class="name">${food.name}
+                  <i class="far fa-heart pic_${i}_${j}"></i> </div>
+                <img src="${food.img}" class="foodImg">
+              <div class="components"><b>${food.components.join('<br>')}</b>
+              </div>
+              <div class="recipe" style="border:1px solid black">${food.recipe}
+              </div>
+              <a href="#top" onclick="window.scrollTo(0,0);return!1;">Наверх</a>`)
+              $("#currentRecipe").css({'position': 'absolute','z-index': '999999', 'height': '1000px', 'width': '100%', 'clear': 'both', 'background-color':'white' });
+          }
+          });
+      });
+    });
+  return false;
+});
+
+};
+
 
 $(document).ready(function(){
 
-  $( "#autocomplete" ).focus();
-  $('#autocomplete').autocomplete({
-      serviceUrl: 'autocomplete.json',
-      minChars: 2,
-      delimiter: /(,|;)\s*/,
-      maxHeight: 400,
-      width: 300,
-      zIndex: 9999,
-      deferRequestBy: 0,
-      params: { country: 'Yes'},
-      onSelect: function(data, value){ },
+  $("#autocomplete").focus();
+  let options = {
+      source: ["Оливье","Цезарь","Борщ", "Холодник","Стейк","Карбонара"],
+      minLength: 2
+  };
+  let selector = '#autocomplete';
+  $(document).on('keydown.autocomplete', selector, function() {
+      $(this).autocomplete(options);
   });
-  
+
   $.ajax({
   url: "https://raw.githubusercontent.com/katekosushkina/cooking.by/master/food.json",
 }).done(function(text) {
@@ -34,7 +63,7 @@ $(document).ready(function(){
     tab.foodList.map((food, j)=>{
       foodList +=
       `<div class="cont" id="cont_${i}_${j}">
-        <div class="name"> ${food.name}
+        <div class="name">${food.name}
           <i class="far fa-heart pic_${i}_${j}"></i> </div>
         <img src="${food.img}" class="foodImg">
       </div>`
@@ -67,7 +96,6 @@ $("#checkbox").on('click', function(){
 $(".far").closest('.cont').show();
 }
 })
-
 
 $("body").on('click', ".foodImg", function(){
   let id = "#"+$(this).parent().attr('id');

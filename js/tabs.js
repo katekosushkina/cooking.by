@@ -6,6 +6,18 @@ function removeCurrentRecipe(){
 $(document).ready(function(){
 
   $( "#autocomplete" ).focus();
+  $('#autocomplete').autocomplete({
+      serviceUrl: 'autocomplete.json',
+      minChars: 2,
+      delimiter: /(,|;)\s*/,
+      maxHeight: 400,
+      width: 300,
+      zIndex: 9999,
+      deferRequestBy: 0,
+      params: { country: 'Yes'},
+      onSelect: function(data, value){ },
+  });
+  
   $.ajax({
   url: "https://raw.githubusercontent.com/katekosushkina/cooking.by/master/food.json",
 }).done(function(text) {
@@ -84,16 +96,4 @@ $("body").on('click', ".foodImg", function(){
   });
 
 });
-  $('#autocomplete').autocomplete({
-      serviceUrl: 'autocomplete.json',
-      minChars: 2,
-      delimiter: /(,|;)\s*/,
-      maxHeight: 400,
-      width: 300,
-      zIndex: 9999,
-      deferRequestBy: 0,
-      params: { country: 'Yes'},
-      onSelect: function(data, value){ },
-  });
-
 });

@@ -26,3 +26,15 @@ header>a>img {
   box-sizing: border-box;
   clear: both;
 }
+
+.foodImg{
+	height: 150px;
+}
+.cont {
+	float:left;
+	margin: 10px;
+}
+
+#currentRecipe>img{
+		height: 350px !important;
+}

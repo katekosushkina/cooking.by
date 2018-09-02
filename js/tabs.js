@@ -1,3 +1,7 @@
+function removeCurrentRecipe(){
+  $("#currentRecipe").html('');
+  $("#currentRecipe").css({'position': 'absolute','z-index': '0', 'height': '0', 'width': '0', 'clear': 'both', 'background-color':'white' });
+};
 $(document).ready(function(){
 
   $( "#autocomplete" ).focus();
@@ -6,7 +10,6 @@ $(document).ready(function(){
 }).done(function(text) {
   let data = JSON.parse(text);
   data.tabs.map((tab, i)=>{
-    console.log(tab.name);
     let foodList = "";
     let activeClass = i===0?'active':'';
     $("#myTab").append(`
@@ -17,10 +20,10 @@ $(document).ready(function(){
       </li>`)
     tab.foodList.map((food, j)=>{
       foodList +=
-      `<div class="cont">
+      `<div class="cont" id="cont_${i}_${j}">
         <div class="name"> ${food.name}
           <i class="far fa-heart" id="pic_${i}_${j}"></i> </div>
-        <img src="${food.img}">
+        <img src="${food.img}" class="foodImg">
       </div>`
     });
     $("#myTabContent").append(
@@ -50,4 +53,32 @@ $(".far").closest('.cont').show();
 })
 
 
+$("body").on('click', ".foodImg", function(){
+  let id = "#"+$(this).parent().attr('id');
+  inf = ($(id).html());
+  imgSrc = $(this).attr('src');
+  console.log(imgSrc);
+  $.ajax({
+  url: "https://raw.githubusercontent.com/katekosushkina/cooking.by/master/food.json",
+}).done(function(text) {
+  let data = JSON.parse(text);
+  data.tabs.map((tab, i)=>{
+    tab.foodList.map((food, j)=>{
+      let foodImg = food.img;
+      if (imgSrc===foodImg){
+            $("#currentRecipe").append(
+                `<button type="button" onclick="removeCurrentRecipe()">назад</button>
+                ${inf}
+                <div class="components"><b>${food.components}</b>
+                </div>
+                <div class="recipe">${food.recipe}
+                </div>`)
+                $("#currentRecipe").css({'position': 'absolute','z-index': '999999', 'height': '1000px', 'width': '1000px', 'clear': 'both', 'background-color':'white' });
+            }
+
+        });
+      });
+  });
+
+});
 });

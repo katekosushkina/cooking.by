@@ -1,5 +1,5 @@
 function removeCurrentRecipe(){
-  $("#currentRecipe").html('');
+  $("#currentRecipe").empty();
   $("#currentRecipe").css({'position': 'absolute','z-index': '0', 'height': '0', 'width': '0', 'clear': 'both', 'background-color':'white' });
 };
 
@@ -28,7 +28,7 @@ function findRecipe(){
               <a href="#top" onclick="window.scrollTo(0,0);return!1;">Наверх</a>`)
               $("#currentRecipe").css({'position': 'absolute','z-index': '999999', 'height': '1000px', 'width': '100%', 'clear': 'both', 'background-color':'white' });
           return false;
-          } else if(index===length-1){
+        } else if(index==length-2){
             alert("Такого рецепта нет!")
           }
           index ++;
@@ -182,8 +182,6 @@ $("body").on('click', "#divRegistration", function(){
 });
 
 localStorage.setItem("kate.kosushkina@gmail.com", "kate");
-console.log(localStorage.key("kate"));
-
 $("body").on('click', "#enter", function(){
   let email = $("#exampleInputEmail1").val();
   let password = $("#exampleInputPassword1").val();
@@ -207,7 +205,7 @@ $("body").on('click', "#registration", function(){
       <b>${email}</b>`);
   }
   else {
-     alert("Такой email уже зарагистрирован!");
+     alert("Такой email уже зарегистрирован!");
   }
 
 });
@@ -229,7 +227,7 @@ $("body").on('click', "#addRecipe", function(){
           <div style="position:relative;">
                 <a class='btn btn-primary' href='javascript:;'>
                   Загрузите картинку
-                  <input type="file" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="file_source" size="40"  onchange='$("#upload-file-info").html($(this).val());'>
+                  <input type="file" id="file" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="file_source" size="40"  onchange='$("#upload-file-info").html($(this).val());'>
                 </a>
                 &nbsp;
                 <span class='label label-info' id="upload-file-info"></span>
@@ -243,9 +241,29 @@ $("body").on('click', "#addRecipe", function(){
             <label for="formGroupExampleInput2">Введите рецепт</label>
             <input type="text" class="form-control" id="formGroupExampleInput3" placeholder="Рецепт">
           </div>
+          <button type="button" id="addCurrentRecipe">Добавить</button>
      </form>
       <a href="#top" onclick="window.scrollTo(0,0);return!1;">Наверх</a>`)
       $("#currentRecipe").css({'position': 'absolute','z-index': '9999', 'height': '1000px', 'width': '100%', 'clear': 'both', 'background-color':'white' });
 
 });
+
+$("body").on('click', "#addCurrentRecipe", function(){
+      let name = $("#formGroupExampleInput").val();
+      let img = $("#file").val();
+      let components = $("#formGroupExampleInput2").val().split(',');
+      let recipe = $("#formGroupExampleInput3").val();
+      let objRecipe = {
+        "name":name,
+        "img":img,
+        "components": components,
+        "recipe": recipe
+      };
+      console.log(objRecipe);
+      $("#currentRecipe").empty();
+      $("#currentRecipe").css({'width':'0','height':'0'});
+
+
+});
+
 });
